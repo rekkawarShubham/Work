@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Calculator</title>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript">
+	  var app = angular.module("calc",[]);
+	  app.controller("calcCtrl",function($scope){
+	  	$scope.add = function(){
+	  		var a = Number($scope.num1);
+	  		var b = Number($scope.num2);
+	  	    $scope.result = a+b;
+	  	}
+	  	$scope.sub = function(){
+	  		var a = Number($scope.num1);
+	  		var b = Number($scope.num2);
+	  	    $scope.result = a-b;
+	  	}
+	  	$scope.mul = function(){
+	  		var a = Number($scope.num1);
+	  		var b = Number($scope.num2);
+	  	    $scope.result = a*b;
+	  	}
+	  	$scope.div = function(){
+	  		var a = Number($scope.num1);
+	  		var b = Number($scope.num2);
+	  	    $scope.result = a/b;
+	  	}
+	  });
+</script>
+</head>
+
+<body ng-app="calc" ng-controller="calcCtrl">
+      
+      <input type="number" name="num1" ng-model="num1" id="num1" required>
+       <input type="number" name="num2" ng-model="num2" id="num2" required>
+    <br>
+       <input type="text" name="result" ng-model="result" id="result">
+     <br>
+     <input type="button" name="add" value="ADD" ng-click="add()" >
+     <input type="button" name="sub" value="SUB" ng-click="sub()" >
+     <br>
+     <input type="button" name="mul" value="MUL" ng-click="mul()" >
+     <input type="button" name="div" value="DIV" ng-click="div()" >
+     <br>
+</body>
+</html>
