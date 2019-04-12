@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>final 5</title>
+</head>
+<body>
+     <table id="emptable" width="60%" border="1">
+     	<tr><th>ID</th><th>Name</th><th>Department</th><th>Salary</th></tr>
+     </table>
+
+     <table id="avgsal" width="60%" border="2">
+     	<th>Department</th><th>Count</th><th>Avg Salary</th>
+     </table>
+    
+    <script type="text/javascript">
+    	var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+             if(this.readyState == 4 && this.status == 200)
+             {
+             	processFile(this);
+             }
+        };
+
+        xhttp.open("GET","employee.xml",true);
+        xhttp.send();
+
+      function processFile(xml)
+      {
+           var xmlDoc  = xml.responseXML;
+           var table = document.getElementById("emptable").innerHTML;
+           var empArray = xmlDoc.getElementsByTagName("employee");
+
+           var salcomp=0,salmech=0,salgame=0;
+           var cntcomp=0,cntmech=0,cntgame=0;
+
+           for(var i=0; i<empArray.length ; i++)
+           {
+           	var id = empArray[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+           	var name=empArray[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+           	var salary = parseInt(empArray[i].getElementsByTagName("salary")[0].childNodes[0].nodeValue);
+           	var department = empArray[i].getElementsByTagName("department")[0].childNodes[0].nodeValue;
+
+                switch(department)
+                {
+                	case "Computer":
+                	      cntcomp++;
+                	      salcomp = salcomp + salary;
+                	      break;
+                	case "Mechanical":
+                	      cntmech++;
+                	      salmech = salmech + salary;
+                	      break;
+                	case "Gaming":
+                	      cntgame++;
+                	      salgame = salgame + salary;
+                	      break;
+                }
+
+               table = table + "<tr><td>" + id + "</td><td>" + name + "</td><td>" + department + "</td><td>" + salary + "</td></tr>"; 
+           }
+
+           document.getElementById("emptable").innerHTML = table;
+
+           salcomp = salcomp/cntcomp;
+           salmech = salmech/cntmech;
+           salgame = salgame/cntgame;
+
+           var table2 = document.getElementById("avgsal").innerHTML;
+           table2 = "<tr><td>Computer</td><td>"+cntcomp+"</td><td>"+salcomp+"</td></tr>" +
+           "<tr><td>Mechanical</td><td>"+cntmech+"</td><td>"+salmech+"</td></tr>"+
+           "<tr><td>Gaming</td><td>"+cntgame+"</td><td>"+salgame+"</td></tr>";
+
+           document.getElementById("avgsal").innerHTML= table2;
+      }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assign 1</title>
+</head>
+<body>
+	   <form name="form1" onsubmit="process()">
+	   	    Name : <input type="text" name="name" placeholder="Enter Name"><br>
+	   	    Address : <input type="text" name="address" placeholder="Enter adress"><br>
+	   	     Gender: <input type="radio" name="cgender" value="Male"/> Male <br>
+	   	    		 <input type="radio" name="cgender" value="Female"/> Female <br>
+
+            Language Knowm : 
+                <legend>Language</legend>
+                <select name="language">
+                	<option>English</option>
+                	<option>Japanese</option>
+                	<option>Sanskrit</option>
+                	<option>Marathi</option>
+                	<option>Hindi</option>
+                </select><br>
+
+           City : <input type="text" name="city" placeholder="Enter city">
+
+           <input type="submit" name="submit" value="SUBMIT">
+			<input type="reset" name="reset" value="RESET">           
+
+	   </form>
+    <script type="text/javascript">
+    	function process(){
+
+       var text = "<?xml version='1.0' encoding='UTF-8'?>"+
+          "<?xml-stylesheet type='text/xsl' href='cust.xsl'?>"  +
+          "<customer>" +
+          "<name>Default</name>"+
+          "<address>Default</address>"+
+          "<gender>Default</gender>"+
+          "<language>Default</language>"+
+          "<city>Default</city>"+
+          "</customer>";
+
+    		var parser , xmlDoc;
+    		parser = new DOMParser();
+
+          xmlDoc = parser.parseFromString(text,"text/xml");
+xmlDoc.getElementsByTagName("name")[0].childNodes[0].nodeValue = document.getElementsByName("name")[0].value;
+xmlDoc.getElementsByTagName("address")[0].childNodes[0].nodeValue = document.getElementsByName("address")[0].value;
+xmlDoc.getElementsByTagName("gender")[0].childNodes[0].nodeValue = document.getElementsByName("cgender")[0].value;
+xmlDoc.getElementsByTagName("language")[0].childNodes[0].nodeValue = document.getElementsByName("language")[0].value;
+xmlDoc.getElementsByTagName("city")[0].childNodes[0].nodeValue = document.getElementsByName("city")[0].value;
+
+    var xmlstring = new XMLSerializer().serializeToString(xmlDoc);
+    alert(xmlstring);
+
+    var element = document.createElement('a');
+    element.setAttribute('href','data:text/xml;charset=utf-8,'+ xmlstring);
+    element.setAttribute('download','shubham.xml');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+
+    	}
+    </script>
+</body>
+</html>

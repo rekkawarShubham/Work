@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My 2 Assgn</title>
+</head>
+
+<style type="text/css">
+	tr{
+		color: blue;
+		width: 10px;
+	}
+
+   select{
+   	color: orange;
+   }
+
+   option{
+   	color:  green;
+   }
+
+   .btn{
+   	color:  blue;
+   }
+   .btn1{
+   	color: red
+   }
+
+</style>
+<body>
+
+	<form action="mypayment.html" method="GET" name="form1" onsubmit="return validate()">
+
+	<table border="1" align="center">
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" name="name" id="name" placeholder="name"></td>
+		</tr>
+	
+	    <tr>
+			<td>Email:</td>
+			<td><input type="email" name="email" id="email" placeholder="email"></td>
+		</tr>
+		<tr>
+			<td>Mobile Number:</td>
+			<td><input type="number" name="mno" id="mno" min="7000000000" max="9999999999" placeholder="Mobile No"></td>
+		</tr>
+		<tr>
+			<td>Select Designation:</td>
+			<td>
+				<select name="designation" form="form1">
+					<option>Student</option>
+					<option>Professor</option>
+					<option>Corporate</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Select Country:</td>
+        <td>
+				<select name="country" form="form1">
+					<option>India</option>
+					<option>USA</option>
+					<option>Russia</option>
+				</select>
+			</td>
+		</tr>
+     <tr>
+     	<td><input class="btn" type="submit" name="submit" value="SUBMIT"></td>
+     	<td><input class="btn1" type="reset" name="reset" value="RESET"></td>
+     </tr>
+
+	</table> 
+	</form>
+
+	<script type="text/javascript">
+		function validate()
+		{
+			var name = document.getElementById("name").value;
+            if(!(/^[a-zA-Z]+$/.test(name)))
+            {
+            	alert("enter correct name");
+                document.getElementById("name").focus();
+                return false;
+            }
+
+            var mob = document.getElementById("mno").value;
+            if(!(/^[987]{1}\d{9}/.test(mob)))
+            {
+            	alert('enter correct number');
+            	document.getElementById("mno").focus();
+            	return false;
+            }
+
+            var emailid = document.getElementById("email").value;
+            var atpos = emailid.indexOf('@');
+            var dotpos = emailid.lastIndexOf('.');
+
+            if(atpos < 1 || (dotpos - atpos)<2 )
+            {
+            	alert("enter valid email ID");
+	             document.getElementById("email").focus();
+            	return false;
+            }
+
+            return true;
+		}
+	</script>
+
+</body>
+</html>
